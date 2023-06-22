@@ -58,12 +58,20 @@ export default {
         ... mapActions(['edit_user_action']),
         editUserForm(){
             this.edit_user_action(this.editUserId);
+            this.$swal({
+                icon: 'success',
+                title: 'Success',
+                text: 'User Updated Succesfully',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+            });
             this.$router.push('/read')
         }
     },
     created() {
         this.editUserId = this.$route.params.id
-        console.log("editUserId === ",this.editUserId,);
         this.$store.state.users.forEach(element => {
             this.editUserData = element
         });
