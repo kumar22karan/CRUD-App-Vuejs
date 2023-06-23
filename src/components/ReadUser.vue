@@ -21,7 +21,7 @@
                     <button class="btn btn-primary" v-on:click="addUserButton">+ Add User</button>
                 </div>
             </div>
-            <table class="table table-bordered bg-light">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Sr No.</th>
@@ -34,9 +34,9 @@
 
                     </tr>
                 </thead>
-                <tbody>
-                    <tr v-for="user in addedNewUser" :key="user">
-                        <th scope="row">1</th>
+                <tbody >
+                    <tr v-for="(user, index) in addedNewUser" :key="user">
+                        <th scope="row">{{ index + 1 }}</th>
                         <td>{{ user.name }}</td>
                         <td>{{ user.age }}</td>
                         <td>{{ user.gender }}</td>
@@ -46,6 +46,9 @@
                             <button><i class="bi bi-pencil" v-on:click="editUser(user.id)"></i></button>
                             <button class="ms-3" v-on:click="removeUser(user.id)"><i class="bi bi-trash"></i></button>
                         </td>
+                    </tr>
+                    <tr class="text-center w-100" v-if="!addedNewUser.length">
+                        <td colspan="7">No Data Found</td>
                     </tr>
                 </tbody>
             </table>
@@ -116,6 +119,8 @@ export default {
         searchUserDebounced: debounce(function () {
             if (this.search.trim() !== '') {
                 this.addedNewUser = this.getUsers.filter(user => user.name.toLowerCase().includes(this.search.toLowerCase()));
+            } else {
+                this.addedNewUser = this.getUsers
             }
         }, 1000),
 

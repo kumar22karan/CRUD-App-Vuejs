@@ -10,6 +10,5 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 
 const app = createApp(App).use(router).use(store).use(VueSweetalert2);
-
 app.mount('#app')
 
